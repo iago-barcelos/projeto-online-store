@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
-import { ProductsList } from './pages/ProductsList';
+import { ProductsList } from './pages/ProductsList/ProductsList';
 import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
