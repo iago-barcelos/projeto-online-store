@@ -4,7 +4,7 @@ import { ProductsList } from './pages/ProductsList';
 import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems/* ,setCarItems */] = useState([]); // descomentar o setCarItems quando for utilizá-lo
 
   return (
     <Routes>
