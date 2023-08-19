@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
-import { getCategories } from '../services/api';
+type ShoppingCartProps = {
+  cartItems: object[];
+};
 
-export function ShoppingCart() {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    getCategories().then((categorie) => setCategories(categorie));
-  }, []);
+export default function ShoppingCart({ cartItems }: ShoppingCartProps) {
   return (
-    <>
+    <div>
       <header>
         <div>
           <input type="text" />
         </div>
       </header>
-      {
-        categories.length < 1
-          ? (
-            <p data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </p>
-          )
-          : <p>Listagem</p>
-      }
-    </>
+      {cartItems.length < 1 ? (
+        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+      ) : (
+        <>
+          <h1>Seu Carrinho de Compras</h1>
+          <ul>
+            {cartItems.map((item, index) => (
+              <li key={ index }>item</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
   );
 }
