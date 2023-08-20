@@ -19,6 +19,7 @@ export function ProductsList() {
   const [categories, setCategories] = useState<Categorie[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
 
   useEffect(() => {
     getCategories().then((newCategories) => {
@@ -34,6 +35,16 @@ export function ProductsList() {
       query: searchQuery,
     });
 
+    setProducts(response.results);
+  };
+
+  const handleCategoryClick = async (categoryId: string) => {
+    const response = await getProductsFromCategoryAndQuery({
+      categoryId,
+      query: '',
+    });
+
+    setSelectedCategoryId(categoryId);
     setProducts(response.results);
   };
 
@@ -98,6 +109,8 @@ export function ProductsList() {
                     className="custom-checkbox"
                     name="category"
                     value={ name }
+                    onClick={ () => handleCategoryClick(id) }
+                    checked={ selectedCategoryId === id }
                   />
                   {name}
                   <span className="checkmark" />
