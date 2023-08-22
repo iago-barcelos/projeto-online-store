@@ -1,19 +1,13 @@
 import { useEffect, useState } from 'react';
-
-type Product = {
-  id: string;
-  title: string;
-  thumbnail: string;
-  price: number;
-};
+import { ProductType } from '../types';
 
 export default function ShoppingCart() {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [cartItems, setCartItems] = useState<ProductType[]>([]);
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
     if (storedCartItems) {
-      const parsedCartItems: Product[] = JSON.parse(storedCartItems);
+      const parsedCartItems: ProductType[] = JSON.parse(storedCartItems);
       setCartItems(parsedCartItems);
     }
   }, []);
@@ -24,7 +18,7 @@ export default function ShoppingCart() {
   };
 
   const getUniqueCartItems = () => {
-    const uniqueCartItems: Product[] = [];
+    const uniqueCartItems: ProductType[] = [];
     cartItems.forEach((item) => {
       if (!uniqueCartItems.some((uniqueItem) => uniqueItem.id === item.id)) {
         uniqueCartItems.push(item);

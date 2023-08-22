@@ -1,24 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { ProductType, CategoryType } from '../types';
 
-type Category = {
-  id: string;
-  name: string;
-};
-
-type Product = {
-  id: string;
-  title: string;
-  thumbnail: string;
-  price: number;
-  category_id: string;
-};
-
-export function ProductsList() {
-  const [categories, setCategories] = useState<Category[]>([]);
+export default function ProductsList() {
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
 
   const loadAllProducts = async (categoryId: string) => {

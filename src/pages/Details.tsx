@@ -9,7 +9,7 @@ type Product = {
   price: number,
 };
 
-export function Details() {
+export default function Details() {
   const [product, setProduct] = useState<Product>({} as Product);
   const { id } = useParams<{ id: string }>();
   useEffect(() => {
