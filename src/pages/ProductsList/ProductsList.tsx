@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
 import './ProductsList.css';
 
@@ -8,12 +8,12 @@ type Categorie = {
   name: string,
 };
 
-type Product = {
-  id: string,
-  title: string,
-  thumbnail: string,
-  price: number,
-};
+ type Product = {
+   id: string,
+   title: string,
+   thumbnail: string,
+   price: number,
+ };
 
 export function ProductsList() {
   const [categories, setCategories] = useState<Categorie[]>([]);
@@ -84,15 +84,21 @@ export function ProductsList() {
             : (
               <ul>
                 {products.map(({ id, title, thumbnail, price }) => (
-                  <li key={ id } data-testid="product">
-                    <img src={ thumbnail } alt={ title } />
-                    <p>{title}</p>
-                    <p>
-                      R$
-                      {' '}
-                      {price.toFixed(2)}
-                    </p>
-                  </li>
+                  <Link
+                    key={ id }
+                    to={ `/details/${id}` }
+                    data-testid="product-detail-link"
+                  >
+                    <li key={ id } data-testid="product">
+                      <img src={ thumbnail } alt={ title } />
+                      <p>{title}</p>
+                      <p>
+                        R$
+                        {' '}
+                        {price.toFixed(2)}
+                      </p>
+                    </li>
+                  </Link>
                 ))}
               </ul>
             )
